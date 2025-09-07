@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog — Hej Organic</title>
+    <style>
+      :root{
+        --primary:#1e88e5;     /* Ubah sesuai brand biru kamu */
+        --primary-600:#1565c0;
+        --ink:#0f172a;
+        --muted:#64748b;
+        --line:#e2e8f0;
+        --bg:#f8fafc;
+        --card:#ffffff;
+        --radius:14px;
+        --shadow:0 10px 30px rgba(2,23,61,.08);
+      }
+
+      *{box-sizing:border-box}
+      html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+      img{max-width:100%;display:block}
+
+      .container{width:min(1200px,92%);margin-inline:auto}
+
+      /* Breadcrumb (opsional) */
+      .breadcrumb{list-style:none;display:flex;gap:.5rem;padding:0;margin:18px 0 8px}
+      .breadcrumb li{color:var(--muted);font-size:.9rem}
+      .breadcrumb a{color:var(--muted);text-decoration:none}
+      .breadcrumb li+li:before{content:"/";margin:0 .5rem;color:var(--line)}
+
+      /* Page header + search */
+      #blogheading{display:grid;gap:14px;margin:10px 0 18px}
+      #blogheading h1{margin:0;font-size:clamp(22px,4vw,34px)}
+      #blogheading .sub{margin:0;color:var(--muted)}
+
+      #hppb-search form{width:100%}
+      .input-group{display:flex;align-items:center;gap:10px}
+      .form-control{flex:1;min-width:0;height:46px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:#fff;outline:none}
+      .form-control:focus{border-color:var(--primary);box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 20%, transparent)}
+      .btn{border:0;height:46px;padding:0 18px;border-radius:999px;cursor:pointer;font-weight:600}
+      .btn-default{background:var(--primary);color:#fff}
+      .btn-default:hover{background:var(--primary-600)}
+
+      /* Layout: content + sidebar */
+      .blog-layout{display:grid;grid-template-columns:1fr 320px;gap:26px;margin:16px 0 60px}
+      @media (max-width: 980px){
+        .blog-layout{grid-template-columns:1fr}
+        aside{order:-1}
+      }
+
+      /* Cards */
+      .post-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+      .post-card{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s ease}
+      .post-card:hover{transform:translateY(-3px)}
+      @media (max-width: 720px){ .post-card{grid-column:span 12} }
+
+      .thumb{aspect-ratio:16/9;background:#eef3f9;overflow:hidden}
+      .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+      .post-card:hover .thumb img{transform:scale(1.04)}
+
+      .post-body{padding:16px 16px 18px}
+      .meta{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted);margin-bottom:8px}
+      .post-title{font-size:1.15rem;line-height:1.35;margin:0 0 8px}
+      .excerpt{color:var(--muted);margin:0 0 14px}
+      .readmore{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#f1f5f9;color:var(--ink);text-decoration:none;font-weight:600;border:1px solid var(--line)}
+      .readmore:hover{background:#e8eef6;border-color:#d6e0ee}
+      .readmore svg{width:16px;height:16px}
+
+      /* Sidebar */
+      aside{position:relative}
+      .sidebar-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:18px}
+      .sidebar-title{margin:0 0 12px;font-size:1.05rem}
+      .cat-list, .popular-list{list-style:none;margin:0;padding:0}
+      .cat-list li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+      .cat-list li:last-child{border-bottom:0}
+      .cat-list a{color:var(--ink);text-decoration:none}
+      .cat-list a:hover{color:var(--primary)}
+
+      .popular-item{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+      .popular-item:last-child{border-bottom:0}
+      .popular-thumb{width:84px;height:64px;border-radius:10px;overflow:hidden;background:#eef3f9}
+      .popular-thumb img{width:100%;height:100%;object-fit:cover}
+      .popular-title{margin:0;font-size:.98rem;line-height:1.3}
+      .popular-meta{font-size:.8rem;color:var(--muted);margin-top:4px}
+
+      /* Pagination (opsional) */
+      .pagination{display:flex;gap:8px;justify-content:center;margin-top:26px}
+      .page-btn{min-width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;text-decoration:none;color:var(--ink);font-weight:600}
+      .page-btn.active, .page-btn:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+
+      /* Helpers */
+      .badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#eaf3ff;color:var(--primary);font-weight:600;font-size:.78rem}
+      .srch-note{display:none;margin-top:8px;color:var(--muted);font-size:.9rem}
+      .srch-note.active{display:block
+
+        /* ===== author & footer on card ===== */
+        .post-foot{
+          display:flex; align-items:center; justify-content:space-between;
+          gap:12px; margin-top:12px
+        }
+        .author{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink)}
+        .author:hover{color:var(--primary)}
+        .author .avatar{
+          width:34px; height:34px; border-radius:50%; overflow:hidden; flex:0 0 34px; background:#eef3f9; border:1px solid var(--line)
+        }
+        .author .avatar img{width:100%; height:100%; object-fit:cover}
+        .author .name{font-weight:600; font-size:.92rem; line-height:1.1}
+        .author .role{display:block; font-size:.75rem; color:var(--muted); font-weight:500}
+
+        /* sedikit rapikan meta */
+        .meta .dot{width:4px;height:4px;border-radius:50%;background:var(--line);align-self:center}
+
+
+    </style>
+  </head>
+  <body>
+
+    <div id="pavoblog-posts" class="container">
+      <ul class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+
+      <header id="blogheading">
+        <h1>Blog</h1>
+        <p class="sub">Insight, tips, dan cerita seputar produk & ekosistem Hej Organic.</p>
+        <div id="hppb-search">
+          <form method="get" class="input-group" id="blogSearchForm">
+            <input name="search_keyword" id="search_keyword" type="search" class="form-control search input-lg" placeholder="Cari artikel…" maxlength="100" />
+            <button type="submit" class="btn btn-default btn-lg" aria-label="Cari">Cari</button>
+          </form>
+          <div class="srch-note" id="srchInfo"></div>
+        </div>
+      </header>
+
+      <div class="blog-layout">
+        <!-- MAIN LIST -->
+        <main>
+          <article class="post-card" data-title="Panduan Memilih Produk Organik untuk Pemula" data-cat="Tips">
+            <a class="thumb" href="/blog/panduan-produk-organik">
+              <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1200" alt="Panduan Memilih Produk Organik">
+            </a>
+            <div class="post-body">
+              <div class="meta">
+                <span class="badge">Tips</span>
+                <span class="dot"></span>
+                <time datetime="2025-08-10">10 Agustus 2025</time>
+              </div>
+
+              <h2 class="post-title">
+                <a href="/blog/panduan-produk-organik" style="color:inherit;text-decoration:none">
+                  Panduan Memilih Produk Organik untuk Pemula
+                </a>
+              </h2>
+
+              <p class="excerpt">
+                Kenali label, bahan, dan cara membaca komposisi agar tidak terkecoh greenwashing. Panduan ringkas untuk mulai beralih ke produk organik…
+              </p>
+
+              <div class="post-foot">
+                <a class="author" href="/author/nadia-pratama" aria-label="Lihat profil penulis">
+                  <span class="avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256" alt="Nadia Pratama">
+                  </span>
+                  <span>
+                    <span class="name">Nadia Pratama</span>
+                    <span class="role">Editor</span>
+                  </span>
+                </a>
+
+                <a class="readmore" href="/blog/panduan-produk-organik" aria-label="Baca selengkapnya">
+                  Read more
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+
+          <!-- Pagination (opsional) -->
+          <nav class="pagination" aria-label="Pagination">
+            <a class="page-btn" href="?page=1">1</a>
+            <a class="page-btn active" href="?page=2" aria-current="page">2</a>
+            <a class="page-btn" href="?page=3">3</a>
+            <a class="page-btn" href="?page=3" aria-label="Berikutnya">›</a>
+          </nav>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside>
+          <section class="sidebar-card">
+            <h3 class="sidebar-title">Kategori</h3>
+            <ul class="cat-list" id="catList">
+              <li><a href="/blog/category/tips">Tips</a> <span>12</span></li>
+              <li><a href="/blog/category/skincare">Skincare</a> <span>9</span></li>
+              <li><a href="/blog/category/edukasi">Edukasi</a> <span>7</span></li>
+              <li><a href="/blog/category/ingredients">Ingredients</a> <span>6</span></li>
+              <li><a href="/blog/category/lifestyle">Lifestyle</a> <span>5</span></li>
+            </ul>
+          </section>
+
+          <section class="sidebar-card">
+            <h3 class="sidebar-title">Artikel Populer</h3>
+            <ul class="popular-list">
+              <li class="popular-item">
+                <a class="popular-thumb" href="/blog/mitos-fakta-sunscreen">
+                  <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600" alt="Mitos & Fakta Sunscreen">
+                </a>
+                <div>
+                  <h4 class="popular-title"><a href="/blog/mitos-fakta-sunscreen" style="color:inherit;text-decoration:none">Mitos & Fakta tentang Sunscreen</a></h4>
+                  <div class="popular-meta">22.1k views • 2025</div>
+                </div>
+              </li>
+              <li class="popular-item">
+                <a class="popular-thumb" href="/blog/routine-minimalis">
+                  <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=600" alt="Routine Minimalis">
+                </a>
+                <div>
+                  <h4 class="popular-title"><a href="/blog/routine-minimalis" style="color:inherit;text-decoration:none">Skincare Routine Minimalis</a></h4>
+                  <div class="popular-meta">18.7k views • 2025</div>
+                </div>
+              </li>
+              <li class="popular-item">
+                <a class="popular-thumb" href="/blog/panduan-produk-organik">
+                  <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=600" alt="Produk Organik">
+                </a>
+                <div>
+                  <h4 class="popular-title"><a href="/blog/panduan-produk-organik" style="color:inherit;text-decoration:none">Panduan Produk Organik</a></h4>
+                  <div class="popular-meta">12.4k views • 2025</div>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <script>
+      // Pencarian sederhana (front-end filter). Jika ingin submit ke server, tetap biarkan action default form.
+      (function(){
+        const form = document.getElementById('blogSearchForm');
+        const input = document.getElementById('search_keyword');
+        const grid = document.getElementById('postGrid');
+        const info = document.getElementById('srchInfo');
+
+        form.addEventListener('submit', function(e){
+          e.preventDefault(); // Hapus baris ini jika ingin request GET ke server
+          const q = (input.value || '').trim().toLowerCase();
+          const cards = grid.querySelectorAll('.post-card');
+          let shown = 0;
+          cards.forEach(card=>{
+            const title = (card.dataset.title||'').toLowerCase();
+            const cat = (card.dataset.cat||'').toLowerCase();
+            const ok = !q || title.includes(q) || cat.includes(q);
+            card.style.display = ok ? '' : 'none';
+            if(ok) shown++;
+          });
+          info.textContent = q ? `Hasil untuk “${q}”: ${shown} artikel` : '';
+          info.classList.toggle('active', !!q);
+        });
+      })();
+    </script>
+  </body>
+</html>

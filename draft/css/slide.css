@@ -1,0 +1,372 @@
+/* ----- Hero base (lanjutan dari CSS Anda sebelumnya) ----- */
+.hero {
+	padding: 30px 0 30px;
+	background: linear-gradient(180deg, #f7f9f6 0%, #fff 100%)
+}
+
+.hero-grid {
+	display: grid;
+	grid-template-columns: 1.25fr .75fr;
+	gap: 24px;
+	align-items: center
+}
+
+@media (max-width:900px) {
+	.hero-grid {
+		grid-template-columns: 1fr
+	}
+}
+
+.h-title {
+	font-size: 38px;
+	line-height: 1.15;
+	margin: 0 0 10px
+}
+
+.h-actions {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap
+}
+
+.hero-illus {
+	aspect-ratio: 4/3;
+	background: #eef2ec;
+	border-radius: 18px;
+	display: grid;
+	place-items: center;
+	color: #556147;
+	font-weight: 600
+}
+
+/* ----- Slider layout ----- */
+.hero-slider {
+	position: relative
+}
+
+.hero-slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity .6s ease
+}
+
+.hero-slide.active {
+	position: relative;
+	opacity: 1
+}
+
+/* Dots */
+.hero-dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 10px;
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+}
+
+.hero-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	background: transparent;
+	cursor: pointer;
+	opacity: 0.6;
+}
+
+.hero-dot.active,
+.hero-dot:hover {
+	background: #fff;
+	opacity: 1;
+}
+
+
+/* Typewriter caret */
+.h-sub {
+	min-height: 1.6em;
+	color: #6b7280;
+	margin: 0 0 18px;
+	position: relative;
+	display: block;
+	max-width: 90%;
+	white-space: normal;
+	word-wrap: break-word;
+	text-align: center;
+}
+
+.h-sub.typewriter::after {
+	content: "";
+	display: inline-block;
+	width: 1px;
+	height: 1em;
+	margin-left: 3px;
+	background: #6b7280;
+	animation: caretBlink 1s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+	50% {
+		opacity: 0
+	}
+}
+
+/* Responsif font h-sub jika perlu */
+@media (max-width:768px) {
+	.h-title {
+		font-size: 32px
+	}
+
+	.h-sub {
+		font-size: 14px;
+		line-height: 1.4
+	}
+}
+
+@media (max-width:480px) {
+	.h-title {
+		font-size: 28px
+	}
+}
+
+.hero-slider {
+	position: relative
+}
+
+.hero-slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity .6s ease
+}
+
+.hero-slide.active {
+	position: relative;
+	opacity: 1
+}
+
+.hero-dots {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	margin-top: 14px
+}
+
+.hero-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #c9d2c0;
+	cursor: pointer;
+	border: 0;
+}
+
+.hero-dot.active {
+	background: #7c8d5a
+}
+
+/* Prev/Next */
+.hero-nav {
+	position: absolute;
+	bottom: 0;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	border: 0;
+	background: #ffffffcc;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	font-size: 18px;
+	line-height: 1;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(-50%) scale(.96);
+	transition: opacity .2s, visibility .2s, background .2s, transform .18s cubic-bezier(.2, .8, .2, 1);
+}
+
+.hero-slide:hover .hero-nav,
+.hero-slider:hover .hero-nav,
+.hero-slider:focus-within .hero-nav,
+.hero-nav:focus-visible {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translateY(-50%) scale(1);
+}
+
+.hero-nav:hover {
+	background: #fff
+}
+
+.hero-nav:active {
+	transform: translateY(-50%) scale(1.12)
+}
+
+.hero-nav.prev {
+	left: 8px
+}
+
+.hero-nav.next {
+	right: 8px
+}
+
+@keyframes navPop {
+	0% {
+		transform: translateY(-50%) scale(1)
+	}
+
+	60% {
+		transform: translateY(-50%) scale(1.14)
+	}
+
+	100% {
+		transform: translateY(-50%) scale(1)
+	}
+}
+
+.hero-nav.pulse {
+	animation: navPop .22s ease-out
+}
+
+@media (max-width:600px) {
+	.hero-nav {
+		width: 32px;
+		height: 32px;
+		font-size: 16px
+	}
+}
+
+@media (hover:none) {
+	.hero-nav {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: translateY(-50%);
+	}
+}
+
+
+/* Pastikan illus selalu proporsional & tidak “melar” */
+.hero-illus {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	/* tetap seperti awal */
+	max-width: 520px;
+	/* opsional, biar tidak terlalu lebar di tablet */
+	margin: 0 auto;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	/* cegah konten di dalam mendorong tinggi */
+}
+
+/* Grid rapi saat stack di mobile */
+.hero-grid {
+	align-items: center;
+	/* pastikan kolom tunggal di mobile tetap tidak melar-melar */
+}
+
+
+/* Container */
+.hero-slider {
+	position: relative;
+	overflow: hidden;
+	/* cegah overflow saat transisi */
+}
+
+/* Slide: jadikan flex container agar konten stabil */
+.hero-slide {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .45s ease;
+	/* jangan absolute default; biar container punya tinggi by content */
+}
+
+/* Slide aktif tampil */
+.hero-slide.active {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Grid di dalam slide boleh dipakai, tapi pastikan tidak merusak flex */
+.hero-slide .hero-grid {
+	display: grid;
+	grid-template-columns: 1.25fr .75fr;
+	gap: 24px;
+	width: 100%;
+}
+
+/* Ilustrasi: kunci proporsi dan jangan boleh melar */
+.hero-illus {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	max-width: 520px;
+	max-height: 48vh;
+	/* batas tinggi di mobile agar tidak jadi terlalu tinggi */
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	margin-left: auto;
+	/* biar rapi di desktop */
+}
+
+/* Konten teks di sisi kiri */
+.h-title {
+	margin: 0 0 10px
+}
+
+.h-sub {
+	margin: 0 0 18px
+}
+
+/* Responsif */
+@media (max-width: 900px) {
+	.hero-slide .hero-grid {
+		grid-template-columns: 1fr;
+		/* stack */
+	}
+
+	.hero-illus {
+		margin: 0 auto;
+		/* center */
+	}
+}
+
+@media (max-width: 600px) {
+	.hero-slide {
+		flex-direction: column;
+		/* stack teks dan ilustrasi */
+		align-items: stretch;
+		gap: 16px;
+	}
+
+	.hero-illus {
+		max-width: 100%;
+		max-height: 44vh;
+		/* sedikit lebih kecil di hp */
+	}
+
+	.h-sub {
+		max-height: 3.2em;
+		/* kira-kira 2 baris */
+		overflow: hidden;
+	}
+}
+
+
+@media (max-width:480px) {
+	.h-sub {
+		max-height: 3.2em;
+		overflow: hidden;
+	}
+}
