@@ -34,19 +34,6 @@
   margin-bottom: 24px;
 }
 
-.parallax-section .btn-cta {
-  background: var(--brand);
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: var(--m-border-radius);
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-.parallax-section .btn-cta:hover {
-  background: var(--brand-500);
-}
-
 .parallax-section .subtitle {
   color: #dedede;
 }

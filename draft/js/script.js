@@ -120,47 +120,66 @@ document.addEventListener('DOMContentLoaded', function(){
   startAutoplay();
 
 
+// Lang and currency switch
+ $(function () {
+  function closeAll() {
+    $('.lang-current-menu').removeClass('open').attr('aria-hidden', 'true');
+    $('.lang-current').attr('aria-expanded', 'false');
+  }
 
-  // Language Switch
-   $(function() {
-        var $wrap  = $('#lang-switch');
-        if (!$wrap.length) return;
+  $('.lang-current-switch').each(function () {
+    var $wrap = $(this);
+    var $btn  = $wrap.find('.lang-current').first();
+    var $menu = $wrap.find('.lang-current-menu').first();
+    var $form = $wrap.find('form').first();
+    var $code = $wrap.find('input[name="code"]').first();
 
-        var $btn   = $wrap.find('.lang-current');
-        var $menu  = $wrap.find('.lang-menu');
-        var $code  = $wrap.find('input[name="code"]');
-        var $form  = $('#form-language');
+    $btn.on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var isOpen = $menu.hasClass('open');
+      closeAll();
+      if (!isOpen) {
+        $menu.addClass('open').attr('aria-hidden', 'false');
+        $btn.attr('aria-expanded', 'true');
+      }
+    });
 
-        // Toggle on click
-        $btn.on('click', function(e) {
-          e.preventDefault();
-          var open = $menu.hasClass('open');
-          $menu.toggleClass('open', !open);
-          $btn.attr('aria-expanded', String(!open));
-          if (!open) $menu.focus();
-        });
+    $menu.on('click', '.lang-current-option', function (e) {
+      e.preventDefault();
+      var val = $(this).attr('name') || $(this).data('code');
+      if (!val) return;
+      $code.val(val);
+      $form.trigger('submit');
+    });
+  });
 
-        // Pick language (pakai name tombol sebagai code)
-        $menu.on('click', '.language-select', function(e) {
-          e.preventDefault();
-          var langCode = $(this).attr('name') || $(this).data('code');
-          if (!langCode) return;
-          $code.val(langCode);
-          $form.trigger('submit');
-        });
+  $(document).on('click', closeAll);
+  $(document).on('keydown', function (e) {
+    if (e.key === 'Escape') closeAll();
+  });
+});
 
-        // Close on outside click
-        $(document).on('click', function(e) {
-          if (!$wrap.is(e.target) && $wrap.has(e.target).length === 0) {
-            $menu.removeClass('open'); $btn.attr('aria-expanded', 'false');
-          }
-        });
 
-        // Close on ESC
-        $(document).on('keydown', function(e) {
-          if (e.key === 'Escape') {
-            $menu.removeClass('open'); $btn.attr('aria-expanded', 'false');
-          }
-        });
-      });
+// Menu
+       (function(){
+            var openCls='open';
+            function closeAll(except){
+              document.querySelectorAll('.menu .dropdown.'+openCls).forEach(function(d){
+                if(d!==except){ d.classList.remove(openCls); d.querySelector('.menu-link').setAttribute('aria-expanded','false'); }
+              });
+            }
+            document.addEventListener('click',function(e){
+              var btn=e.target.closest('.menu .dropdown .menu-link');
+              var wrap=e.target.closest('.menu .dropdown');
+              if(btn){
+                var p=btn.closest('.dropdown'); var is=p.classList.contains(openCls);
+                closeAll(p); p.classList.toggle(openCls,!is);
+                btn.setAttribute('aria-expanded',String(!is)); e.preventDefault(); return;
+              }
+              if(!wrap) closeAll();
+            });
+            document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeAll(); });
+            var nav=document.getElementById('nav-toggle'); if(nav){ nav.addEventListener('change',function(){ if(!nav.checked) closeAll(); }); }
+          })();
 });

@@ -31,187 +31,130 @@
 
 
     <script src="js/script.js"></script>
+    <script src="js/product_slider.js"></script>
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
 
   </head>
 
   <body>
-<!-- Marquee Line -->
-<div class="marquee-line">
-  <div class="container">
-    <div class="marquee-content is-marquee">
-      <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
-      <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
-      <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
+    <!-- Marquee Line -->
+    <div class="marquee-line">
+      <div class="container">
+        <div class="marquee-content is-marquee">
+          <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
+          <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
+          <span>Promo Hej Organic • Diskon hingga 50% • Free Ongkir Jakarta</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-    <style>
-.marquee-line {
-  width: 100%;
-  overflow: hidden;
-  background: linear-gradient(0deg, #0000001a 0% 100%),
-              linear-gradient(90deg, #f5931b -34.62%, #e35273 112.82%);
-  color: #fff;
-  font-size: 14px;
-  padding: 6px 0;
-  position: relative;
-}
-
-.marquee-line .container {
-  overflow: hidden; /* batasi area teks */
-  white-space: nowrap;
-}
-
-.marquee-content {
-  display: inline-block;
-}
-
-.marquee-content span {
-  display: inline-block;
-  margin-right: 50px;
-}
-
-.is-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-.marquee-line:hover .is-marquee {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-    </style>
-
 
     <!-- Header -->
     <header class="topbar">
       <div class="container nav">
-<!--
-        <div class="brand">
-          <span class="dot"></span> Hej Organic
-        </div>
+        <!--
+<div class="brand">
+<span class="dot"></span> Hej Organic
+</div>
 -->
 
         <div class="brand">
-         <img src="https://hejorganic.id/image/cache/catalog/logo/logo-hej-organic-new-200x115.png"/>
+          <img src="https://hejorganic.id/image/cache/catalog/logo/logo-hej-organic-new-200x115.png"/>
         </div>
 
         <!-- Language Switcher -->
-        <div class="lang-switch btn-group" id="lang-switch">
-          <form action="" aria-atomic=""method="post" enctype="multipart/form-data" id="form-language">
-            <button class="btn btn-link dropdown-toggle lang-current" type="button"
-                    aria-haspopup="true" aria-expanded="false">
-              <img src="catalog/language/en-gb/en-gb.png" alt="English" title="English">
-              <span class="hidden-xs hidden-sm hidden-md lang-label">Language</span>
-              <i class="chevron"></i>
-            </button>
+        <div class="lang-current-switch btn-group" id="lang-current-switch">
+          <form action="https://demo05.hpwebdesign.io/index.php?route=common/language/language" method="post" enctype="multipart/form-data" id="form-language">
+            <div class="btn-group">
+              <button class="btn btn-link dropdown-toggle lang-current" data-toggle="dropdown">
 
-            <ul class="dropdown-menu lang-menu">
-              <li>
-                <button class="btn btn-link btn-block language-select lang-option"
-                        type="button" name="en-gb">
-                  <img src="catalog/language/en-gb/en-gb.png" alt="English" title="English">
-                  <span>English</span>
-                </button>
-              </li>
-              <li>
-                <button class="btn btn-link btn-block language-select lang-option"
-                        type="button" name="id-id">
-                  <img src="catalog/language/id-id/id-id.png" alt="Indonesia" title="Indonesia">
-                  <span>Indonesia</span>
-                </button>
-              </li>
-              <!-- Tambah bahasa lain di sini -->
-            </ul>
-
+                <img src="catalog/language/en-gb/en-gb.png" alt="English" title="English">
+                <span class="hidden-xs hidden-sm hidden-md">Language</span>&nbsp;<i class="chevron"></i></button>
+              <ul class="dropdown-menu lang-current-menu">
+                <li>
+                  <button class="btn btn-link btn-block language-select lang-current-option" type="button" name="en-gb"><img src="catalog/language/en-gb/en-gb.png" alt="English" title="English"> English</button>
+                </li>
+                <li>
+                  <button class="btn btn-link btn-block language-select lang-current-option" type="button" name="id-id"><img src="catalog/language/id-id/id-id.png" alt="Indonesia" title="Indonesia"> Indonesia</button>
+                </li>
+              </ul>
+            </div>
             <input type="hidden" name="code" value="">
-            <input type="hidden" name="redirect"
-                   value="">
+            <input type="hidden" name="redirect" value="https://demo05.hpwebdesign.io/">
           </form>
         </div>
         <!-- /Language Switcher -->
 
-
-<!--    MENU   -->
-<label for="nav-toggle" class="burger" aria-label="Toggle menu">
-  <span></span><span></span><span></span>
-</label>
-<input type="checkbox" id="nav-toggle" hidden>
-
-<nav class="menu">
-  <a href="#">Home</a>
-
-  <!-- 2 kolom -->
-  <div class="dropdown mega">
-    <button class="menu-link dropdown-toggle" type="button">Products</button>
-    <div class="dropdown-menu">
-      <div class="row">
-        <div class="col-sm-6">
-          <ul class="list-unstyled">
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Best Sellers</a></li>
-            <li><a href="#">Organic Snacks</a></li>
-          </ul>
+        <!--     currency switcher -->
+        <div class="lang-current-switch btn-group" id="lang-current-switch">
+          <form action="https://demo05.hpwebdesign.io/index.php?route=common/currency/currency" method="post" enctype="multipart/form-data" id="form-currency">
+            <div class="btn-group">
+              <button class="btn btn-link dropdown-toggle lang-current" data-toggle="dropdown">
+                <strong>$</strong>
+                <span class="hidden-xs hidden-sm hidden-md">Currency</span>&nbsp;<i class="chevron"></i></button>
+              <ul class="dropdown-menu lang-current-menu">
+                <li>
+                  <button class="currency-select btn btn-link btn-block lang-current-option" type="button" name="IDR">Rp IDR</button>
+                </li>
+                <li>
+                  <button class="currency-select btn btn-link btn-block lang-current-option" type="button" name="USD">$ US Dollar</button>
+                </li>
+              </ul>
+            </div>
+            <input type="hidden" name="code" value="">
+            <input type="hidden" name="redirect" value="https://demo05.hpwebdesign.io/">
+          </form>
         </div>
-        <div class="col-sm-6">
-          <ul class="list-unstyled">
-            <li><a href="#">Cold-Pressed Juice</a></li>
-            <li><a href="#">Bundles & Kits</a></li>
-            <li><a href="#">Gift Cards</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 1 kolom -->
-  <div class="dropdown">
-    <button class="menu-link dropdown-toggle" type="button">Categories</button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Fruits</a></li>
-      <li><a href="#">Vegetables</a></li>
-      <li><a href="#">Dairy</a></li>
-      <li><a href="#">Bakery</a></li>
-      <li><a href="#">Groceries</a></li>
-    </ul>
-  </div>
+        <!--    MENU   -->
+        <label for="nav-toggle" class="burger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle" hidden>
 
-  <a href="#">About</a>
-  <a href="#">Contact</a>
-  <a class="cta-btn" href="#">Shop Now</a>
-</nav>
+        <nav class="menu">
+          <a href="#">Home</a>
 
+          <!-- 2 kolom -->
+          <div class="dropdown mega">
+            <button class="menu-link dropdown-toggle" type="button">Products</button>
+            <div class="dropdown-menu">
+              <div class="row">
+                <div class="col-sm-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Organic Snacks</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#">Cold-Pressed Juice</a></li>
+                    <li><a href="#">Bundles & Kits</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <script>
-(function(){
-  var openCls='open';
-  function closeAll(except){
-    document.querySelectorAll('.menu .dropdown.'+openCls).forEach(function(d){
-      if(d!==except){ d.classList.remove(openCls); d.querySelector('.menu-link').setAttribute('aria-expanded','false'); }
-    });
-  }
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.menu .dropdown .menu-link');
-    var wrap=e.target.closest('.menu .dropdown');
-    if(btn){
-      var p=btn.closest('.dropdown'); var is=p.classList.contains(openCls);
-      closeAll(p); p.classList.toggle(openCls,!is);
-      btn.setAttribute('aria-expanded',String(!is)); e.preventDefault(); return;
-    }
-    if(!wrap) closeAll();
-  });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeAll(); });
-  var nav=document.getElementById('nav-toggle'); if(nav){ nav.addEventListener('change',function(){ if(!nav.checked) closeAll(); }); }
-})();
-</script>
+          <!-- 1 kolom -->
+          <div class="dropdown">
+            <button class="menu-link dropdown-toggle" type="button">Categories</button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Fruits</a></li>
+              <li><a href="#">Vegetables</a></li>
+              <li><a href="#">Dairy</a></li>
+              <li><a href="#">Bakery</a></li>
+              <li><a href="#">Groceries</a></li>
+            </ul>
+          </div>
 
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a class="cta-btn" href="#">Shop Now</a>
+        </nav>
 
       </div>
     </header>
@@ -631,8 +574,12 @@
                 </div>
               </div>
             </li>
-
           </ul>
+
+          <div class="container text-center cta-wrapper">
+            <a href="#" class="cta-btn">MORE PRODUCTS</a>
+          </div>
+
         </div>
         <div class="tab-pane" id="tab-discount">
           <ul class="product-list">
@@ -769,93 +716,99 @@
             </li>
 
           </ul>
+
+          <div class="container text-center cta-wrapper">
+            <a href="#" class="cta-btn">MORE PRODUCTS</a>
+          </div>
+
         </div>
       </div>
     </div>
 
-<section class="new-products section">
-    <div class="container">
-      <h3 class="section-title">Related Products</h3>
-      <div class="slider-wrapper">
-        <button class="products__nav-btn is-left is-disabled" type="button" aria-label="Prev">&lsaquo;</button>
-        <div class="products__slider">
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
+    <section class="new-products section">
+      <div class="container">
+        <h3 class="section-title">LATEST PRODUCTS</h3>
+        <p class="subtitle">Produk terbaru, fresh, home made, 100% organic</p>
+        <div class="slider-wrapper">
+          <button class="products__nav-btn is-left is-disabled" type="button" aria-label="Prev">&lsaquo;</button>
+          <div class="products__slider">
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
+              <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
+              <p class="product-price">IDR 78,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
+            <div class="products__item">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
+              <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
+              <p class="product-price">IDR 47,000.00</p>
+              <button class="new-products__buy btn-primary">Buy</button>
+            </div>
           </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Beef">
-            <h3 class="product-name">Ground Beef With 20% Fat By TGF 500 Gram</h3>
-            <p class="product-price">IDR 78,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
-          <div class="products__item">
-            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300" alt="Ground Fat">
-            <h3 class="product-name">Ground Fat (Milled Fat) To Make Tallow 500 Grams</h3>
-            <p class="product-price">IDR 47,000.00</p>
-            <button class="new-products__buy btn-primary">Buy</button>
-          </div>
+          <button class="products__nav-btn is-right" type="button" aria-label="Next">&rsaquo;</button>
         </div>
-        <button class="products__nav-btn is-right" type="button" aria-label="Next">&rsaquo;</button>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- Features -->
     <section class="feature-section section">
@@ -896,7 +849,7 @@
         <div class="container text-center">
           <h2 class="title">GET MORE PROFITS</h2>
           <p class="subtitle">By joining as a reseller of Hej Organic</p>
-          <a href="#" class="btn-cta">JOIN NOW</a>
+          <a href="#" class="cta-btn">JOIN NOW</a>
         </div>
       </div>
     </section>
@@ -972,17 +925,11 @@
       </div>
     </footer>
 
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-    </script>
-
     <!-- floating cart -->
     <a href="#" class="cart-fab">
       <span class="glyphicon glyphicon-shopping-cart"></span>
       <span class="badge">3</span>
     </a>
-
-    <script src="js/product_slider.js"></script>
 
   </body>
 </html>
