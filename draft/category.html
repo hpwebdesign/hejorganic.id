@@ -19,7 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/category_wall.css">
+<!--    <link rel="stylesheet" href="css/category_wall.css">-->
     <link rel="stylesheet" href="css/slide.css">
     <link rel="stylesheet" href="css/parallax.css">
     <link rel="stylesheet" href="css/package.css">
@@ -80,271 +80,361 @@
       }
 
 
-      /* ====== Category Layout (Flex) ====== */
-      .category-page > .row{
-        display:flex;
-        gap:24px;
-        align-items:flex-start;
-        flex-wrap:nowrap; /* sidebar + content */
-      }
+      /* Category page scope */
+.category-page { --radius: var(--l-border-radius,12px); --line: var(--ring,#e5e7eb); }
 
-      /* Sidebar kiri */
-      #column-left{
-        flex:0 0 260px;
-        max-width:260px;
-        position:sticky;
-        top:84px;
-        align-self:flex-start;
-      }
-      @media (max-width:992px){
-        .category-page > .row{flex-wrap:wrap}
-        #column-left{flex:1 1 100%; max-width:none; order:1}
-      }
+/* Breadcrumb */
+/*.category-page .breadcrumb { background:#fff; border:1px solid var(--line); border-radius: var(--m-border-radius,8px); padding:8px 12px; }*/
 
-      /* Konten utama */
-      #content{
-        flex:1 1 auto;
-        min-width:0;
-        order:2;
-      }
+/* Sidebar */
+.category-page .category-sidebar { position:relative; }
+.category-page .list-group-title{
+  font-weight:600; font-size:14px; color:var(--fg,#1f2937);
+  margin:0 0 8px; padding:10px 12px; background:#fff; border:1px solid var(--line); border-radius: var(--m-border-radius,8px);
+}
+.category-page .list-group{ overflow:auto; border:1px solid var(--line); border-radius: var(--m-border-radius,8px); }
+.category-page .list-group-item{
+  border:0; border-bottom:1px solid var(--line); padding:10px 12px; color:var(--fg,#1f2937);
+}
+.category-page .list-group-item:last-child{ border-bottom:0; }
+.category-page .list-group-item:hover{ background:var(--chip-bg,#d9c2b5); color:var(--chip-text,#fff); }
+.category-page .list-group-item.active,
+.category-page .list-group-item.active:hover{ background:var(--brand,#7c8d5a); color:#fff; }
 
-      /* ====== Breadcrumb ====== */
-      #product-category .breadcrumb{
-        margin:8px 0 18px;
-        padding:0;
-        background:transparent;
-        border:0;
-      }
+/* Header */
+.category-page .category-header{
+  display:flex; align-items:center; justify-content:space-between;
+  background:#fff; border:1px solid var(--line); border-radius: var(--m-border-radius,8px); padding:14px 16px; margin-bottom:14px;
+}
+.category-page .category-title{ margin:0; font-size:20px; line-height:1.25; color:var(--fg,#1f2937); }
+.category-page .category-sub{ margin:6px 0 0; color:var(--muted,#6b7280); }
+.category-page .category-media img{ border-radius: var(--s-border-radius,4px); }
 
-      /* ====== Sidebar List Group ====== */
-      #column-left .list-group-title{
-        font-weight:600;
-        margin-bottom:10px;
-        color:var(--fg,#1f2937);
-      }
-      #column-left .list-group{
-        display:flex;
-        flex-direction:column;
-        gap:6px;
-        background:var(--card-bg,#fff);
-        border:1px solid var(--ring,#e5e7eb);
-        border-radius:12px;
-        padding:10px;
-      }
-      #column-left .list-group .list-group-item{
-        display:block;
-        padding:9px 10px;
-        border:0;
-        border-radius:8px;
-        color:var(--fg,#1f2937);
-        background:transparent;
-        text-decoration:none;
-      }
-      #column-left .list-group .list-group-item:hover{
-        background:rgba(0,0,0,.03);
-      }
-      #column-left .list-group .list-group-item.active{
-        background:var(--brand,#7c8d5a);
-        color:#fff;
-      }
+/* Toolbar */
+.category-page .category-toolbar{
+  display:flex; align-items:center; justify-content:space-between;
+  background:#fff; border:1px solid var(--line); border-radius: var(--m-border-radius,8px); padding:10px 12px; margin-bottom:14px; gap:10px;
+}
+.category-page .view-switch .btn{ border-color:var(--line); }
+.category-page .view-switch .btn.active{ background:var(--brand,#7c8d5a); color:#fff; border-color:var(--brand,#7c8d5a); }
+.category-page .form-inline .form-group{ margin-left:8px; }
+.category-page label.control-label{ margin-right:6px; font-weight:500; }
 
-      /* ====== Header kategori & info ====== */
-      #content > h2{
-        margin:4px 0 8px;
-        font-size:22px;
-        color:var(--fg,#1f2937);
-      }
-      .category-info .img-thumbnail{
-        border-radius:12px;
-        border:1px solid var(--ring,#e5e7eb);
-      }
+/* Products grid (flex, gap) */
+.category-page .products-grid{
+  display:flex; flex-wrap:wrap; gap:16px;
+}
+@media (min-width:1200px){ .category-page .products-grid{ gap:18px; } }
 
-      /* ====== Toolbar (grid/list, compare, sort, limit) ====== */
-      .products-collection > .row:first-child{
-        display:flex !important;
-        flex-wrap:wrap;
-        gap:12px 16px;
-        align-items:center;
-        margin-bottom:12px;
-      }
-      .products-collection .btn-split-grid{
-        display:inline-flex;
-        border:1px solid var(--ring,#e5e7eb);
-        border-radius:10px;
-        overflow:hidden;
-      }
-      .products-collection .btn-split-grid .btn{
-        border:0;
-        background:#fff;
-      }
-      .products-collection .btn-split-grid .btn.active{
-        background:var(--brand,#7c8d5a);
-        color:#fff;
-      }
-      .products-collection .form-group.input-group.input-group-sm{
-        display:flex;
-        align-items:center;
-      }
-      .products-collection .input-group-addon{
-        background:#fff;
-        border:1px solid var(--ring,#e5e7eb);
-        border-right:0;
-        border-radius:8px 0 0 8px;
-        width: 100%;
-        height: 30px;
-        padding: 0;
-        margin: 0;
-        line-height: 30px;
-      }
-      .products-collection select.form-control{
-        border:1px solid var(--ring,#e5e7eb);
-        border-radius:0 8px 8px 0;
-      }
+/* Card sizing */
+.category-page .product-layout{ width:calc(50% - 8px); }
+@media (min-width:768px){ .category-page .product-layout{ width:calc(33.333% - 11px); } }
+@media (min-width:992px){ .category-page .product-layout{ width:calc(25% - 12px); } }
+@media (min-width:1400px){ .category-page .product-layout{ width:calc(20% - 14px); } }
 
-      /* ====== Grid Produk (Flex) ====== */
-      .products-collection > .row:nth-of-type(2){
-        display:flex !important;
-        flex-wrap:wrap;
-        gap:20px;
-      }
+/* Product card */
+.category-page .product-thumb:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(15,21,53,.10); }
+.category-page .product-thumb .image{ padding:12px; }
+.category-page .product-thumb .image img{ width:100%; border-radius: var(--s-border-radius,4px); }
+.category-page .product-thumb .caption{ padding:0 12px 12px; color:var(--fg,#1f2937); min-height: unset;}
+.category-page .product-thumb h4{ font-size:14px; line-height:1.35; margin:0 0 6px; }
+.category-page .product-thumb p{ color:var(--muted,#6b7280); font-size:12px; margin:0 0 8px; }
 
-      /* Matikan “kolom” bawaan bootstrap pada kartu */
-      .product-layout,[class*="col-"]{
-        float:none !important;
-        width:auto !important;
-        padding:0 !important;
-      }
+.category-page .product-thumb .button-group{
+  margin-top:auto; display:flex; gap:8px; padding:12px;
+/*  border-top:1px solid var(--line);*/
+}
+.category-page .product-thumb .button-group button{
+  flex:1 1 auto; border-radius: var(--s-border-radius,4px); height: 40px;
+}
+.category-page .product-thumb .button-group button:first-child{ background:var(--brand,#7c8d5a); color:#fff; border-color:var(--brand,#7c8d5a); }
+.category-page .product-thumb .button-group button:first-child:hover{ background:var(--brand-500,#95a974); border-color:var(--brand-500,#95a974); }
 
-      /* Slot kartu produk: target 2–4 kolom responsive */
-      .product-layout{
-        flex:1 1 200px;      /* dasar 200px */
-        max-width:260px;     /* limit lebar kartu */
-      }
-      @media (min-width:480px){ .product-layout{flex-basis:220px} }
-      @media (min-width:992px){ .product-layout{flex-basis:240px} }
+/* Pagination */
+.category-page .category-pagination{
+  display:flex; align-items:center; justify-content:space-between; gap:10px; margin:16px 0 24px;
+}
+.category-page .pagination>li>a,
+.category-page .pagination>li>span{
+  border-radius: var(--s-border-radius,4px); border:1px solid var(--line);
+}
+.category-page .pagination>li.active>span{ background:var(--brand,#7c8d5a); border-color:var(--brand,#7c8d5a); }
 
-      /* ====== Kartu Produk: samakan feel dengan .products__item ====== */
-      .products__item,
-      .product-thumb{
-        display:flex;
-        flex-direction:column;
-        border:1px solid var(--ring,#e5e7eb);
-        border-radius:16px;
-        background:var(--card-bg,#fff);
-        box-shadow:0 8px 24px rgba(15,21,53,.06);
-        overflow:hidden;
-      }
+/* Mobile filter */
+@media (max-width:767px){
+  .category-page .category-toolbar{ flex-wrap:wrap; }
+  #toggle-filter{ margin-left:8px; }
+  .mobile-filter{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:1030; }
+  .mobile-filter .panel{ position:absolute; left:0; top:0; bottom:0; width:84%; max-width:340px; background:#fff; padding:12px; overflow:auto; }
+}
 
-      /* Gambar */
-      .product-thumb .image{position:relative}
-      .product-thumb .image img{
-        width:100%; height:auto; display:block;
-      }
 
-      /* Action group (hover) */
-      .product-thumb .group-action{
-        position:absolute; left:8px; right:8px; bottom:8px;
-        display:flex; gap:8px; justify-content:space-between;
-        opacity:0; transform:translateY(6px);
-        transition:opacity .2s ease, transform .2s ease;
-      }
-      .product-thumb:hover .group-action{opacity:1; transform:translateY(0)}
-      .product-thumb .btn{
-        border-radius:10px; border:1px solid var(--ring,#e5e7eb);
-        background:#fff;
-      }
-      .product-thumb .btn.btn-cart{
-        flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
-        border-color:var(--brand,#7c8d5a); color:var(--brand,#7c8d5a);
-      }
-      .product-thumb .btn.btn-cart:hover{
-        background:var(--brand,#7c8d5a); color:#fff;
-      }
+      /* Grid kategori praktis */
+.category-page .products-grid{
+  display:grid;
+  grid-template-columns:repeat(var(--cols,5), minmax(0,1fr));
+  gap:16px;
+}
 
-      /* Meta */
-      .product-thumb .product-meta{padding:12px 14px}
-      .product-thumb .caption .name{
-        font-size:14px; line-height:1.45; margin:0 0 8px;
-      }
-      .product-thumb .price{
-        font-weight:700; color:var(--fg,#1f2937); margin-bottom:6px;
-      }
-      .product-thumb .description{
-        font-size:12px; color:var(--muted,#6b7280);
-        display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
-      }
+/* Default desktop: tanpa sidebar → 5 */
+.category-page{ --cols:5; }
 
-      /* Quickview bubble */
-      .pav-ownstyle.pav-quickview{
-        position:absolute; top:8px; right:8px;
-        background:#fff; border:1px solid var(--ring,#e5e7eb);
-        width:34px; height:34px; border-radius:50%;
-        display:flex; align-items:center; justify-content:center;
-        opacity:.95;
-      }
+/* 1 sidebar → 4 */
+.category-page.has-left:not(.has-right) .products-grid,
+.category-page.has-right:not(.has-left) .products-grid{ --cols:4; }
 
-      /* ====== Pagination & info ====== */
-      .products-collection > .row:last-child{
-        display:flex !important;
-        align-items:center; justify-content:space-between;
-      }
-      .pagination>li>a,.pagination>li>span{
-        border-radius:8px !important;
-      }
+/* 2 sidebar → 3 */
+.category-page.has-left.has-right .products-grid{ --cols:3; }
 
-      /* ====== Mode Grid/List (opsional) ====== */
-      .category-page[data-grid="1"] .product-thumb .description{-webkit-line-clamp:6}
-      .category-page[data-grid="1"] .product-layout{flex:1 1 100%; max-width:none}
+/* Mobile → 2 */
+@media (max-width:767px){
+  .category-page{ --cols:2; }
+}
 
-      /* Form control & label dalam toolbar sorting */
-      .products-collection .form-group.input-group.input-group-sm .input-group-addon,
-      .products-collection .form-group.input-group.input-group-sm .form-control {
-        height:30px;              /* same height */
-        line-height:30px;
-        border:0 !important;      /* remove border */
-        box-shadow:none !important;
-        outline:none;
-        background:transparent;   /* no inset bg */
-        border-radius:0;          /* hilangkan radius bawaan */
-        padding:0 8px;
-      }
+/* Biarkan grid yang atur lebar kartu */
+.category-page .product-layout{ width:auto !important; }
 
-      /* Hilangkan background abu-abu default pada addon */
-      .products-collection .form-group.input-group.input-group-sm .input-group-addon {
-        background:transparent !important;
-        color:var(--fg,#1f2937);
-      }
 
-      /* Default grid style */
-      .product-layout.product-grid {
-        flex:1 1 220px;
-        max-width:260px;
-        display:flex;
-      }
-      .product-layout.product-grid .product-thumb {
-        display:flex;
-        flex-direction:column;
-      }
+      /* === CATEGORY PAGE === */
+.category-page {
+  --card-min: 160px; /* target lebar minimum card */
+  --gap: 20px;       /* jarak antar card */
+}
 
-      /* List style */
-      .product-layout.product-list {
-        flex:1 1 100%;
-        max-width:none;
-      }
-      .product-layout.product-list .product-thumb {
-        display:flex;
-        flex-direction:row;
-        gap:16px;
-      }
-      .product-layout.product-list .product-thumb .image {
-        flex:0 0 200px;
-      }
-      .product-layout.product-list .product-thumb .product-meta {
-        flex:1;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-      }
+/* Grid produk */
+.category-page .products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr));
+  gap: var(--gap);
+}
+
+/* Reset agar ikut grid */
+.category-page .product-layout {
+  width: auto !important;
+  margin: 0 !important;
+}
+
+/* Product card */
+.category-page .product-thumb {
+  border: 1px solid var(--ring, #e5e7eb);
+  border-radius: var(--m-border-radius, 8px);
+  background: var(--card-bg, #fff);
+  box-shadow: 0 6px 16px rgba(15, 21, 53, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform .18s ease, box-shadow .18s ease;
+  margin: 0;
+}
+.category-page .product-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 21, 53, 0.1);
+}
+.category-page .product-thumb .image {
+  padding: 12px;
+}
+.category-page .product-thumb .image img {
+  width: 100%;
+  border-radius: var(--s-border-radius, 4px);
+}
+.category-page .product-thumb .caption {
+  padding: 0 12px 12px;
+  color: var(--fg, #1f2937);
+}
+.category-page .product-thumb h4 {
+  font-size: 14px;
+  line-height: 1.35;
+  margin: 0 0 6px;
+  color: var(--brand);
+  text-transform: uppercase;
+}
+.category-page .product-thumb p {
+  color: var(--muted, #6b7280);
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+.category-page .product-thumb .price {
+  font-weight: 600;
+  color: var(--fg, #1f2937);
+  font-size: 13px;
+}
+.category-page .product-thumb .price-old {
+  color: #9ca3af;
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+.category-page .product-thumb .price-tax {
+  display: block;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  display: none !important;
+}
+
+.category-page .product-thumb .price > span {
+  display: block;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 3px 0;
+}
+
+/* Tombol aksi */
+/*
+.category-page .product-thumb .button-group {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--ring, #e5e7eb);
+  margin: 0;
+}
+.category-page .product-thumb .button-group button {
+  flex: 1 1 auto;
+  border-radius: var(--s-border-radius, 4px);
+}
+.category-page .product-thumb .button-group button:first-child {
+  background: var(--brand, #7c8d5a);
+  color: #fff;
+  border-color: var(--brand, #7c8d5a);
+}
+.category-page .product-thumb .button-group button:first-child:hover {
+  background: var(--brand-500, #95a974);
+  border-color: var(--brand-500, #95a974);
+}
+*/
+
+/* Mobile tweaks */
+@media (max-width: 767px) {
+  .category-page {
+    --gap: 14px;
+  }
+}
+
+
+      /* === LIST VIEW === */
+.category-page .products-grid .product-layout.product-list{
+  grid-column: 1 / -1; /* penuh 1 baris */
+}
+
+/* Layout kartu jadi 2 kolom: gambar + konten */
+.category-page .product-layout.product-list .product-thumb{
+  display:grid;
+  grid-template-columns: var(--list-img,200px) 1fr;
+  grid-template-rows: auto auto;
+  column-gap:16px;
+}
+
+/* Gambar kiri, tinggi fleksibel */
+.category-page .product-layout.product-list .image{
+  grid-column:1; grid-row:1 / span 2;
+  padding:12px;
+}
+.category-page .product-layout.product-list .image img{
+  width:100%; height:auto; border-radius:var(--radius-s,4px);
+}
+
+/* Konten kanan */
+.category-page .product-layout.product-list .caption{
+  grid-column:2; grid-row:1;
+  padding:12px 12px 8px 0;
+}
+
+/* Tombol di bawah konten kanan */
+.category-page .product-layout.product-list .button-group{
+  grid-column:2; grid-row:2;
+  margin-top:0; padding:12px;
+  border-top:1px solid var(--ring, #e5e7eb);
+  display:flex; gap:8px;
+}
+
+/* Lebar gambar list bisa dinaikkan di layar besar */
+@media (min-width:1200px){
+  .category-page{ --list-img:220px; }
+}
+
+/* Mobile: tumpuk vertikal */
+/*@media (max-width:767px){
+/*
+  .category-page .product-layout.product-list{ grid-column:auto; }
+  .category-page .product-layout.product-list .product-thumb{
+    display:flex; flex-direction:column;
+  }
+  .category-page .product-layout.product-list .caption{
+    padding:0 12px 8px;
+  }
+  .category-page .product-layout.product-list .button-group{
+    padding:12px; border-top:1px solid var(--ring, #e5e7eb);
+  }
+}
+*/
+
+/* Grid view: tombol muncul saat hover */
+/*
+.category-page .product-layout.product-grid .product-thumb .button-group{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(6px);
+  transition:opacity .18s ease, transform .18s ease;
+}
+.category-page .product-layout.product-grid .product-thumb:hover .button-group{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+*/
+
+/* Mobile: selalu tampil */
+/*
+@media (max-width:767px){
+  .category-page .product-layout.product-grid .product-thumb .button-group{
+    opacity:1; visibility:visible; transform:none;
+  }
+}
+*/
+
+  .product-layout.product-grid .button-group {
+    position: relative;
+  }
+
+.product-layout.product-grid .button-group .button-wishlist {
+  position: absolute;
+  top: -50px;
+  right: 7px;
+  border-radius: 50%;
+  background: var(--ui, #eef2ec);
+  color: var(--brand);
+  border: none;
+}
+
+.product-layout.product-grid .button-group .button-compare {
+ display: none;
+}
+
+.product-layout.product-grid .button-group .button-wishlist:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* 2-line clamp + ellipsis */
+.category-page .product-thumb .caption p{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      /* jumlah baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  /* optional: samakan tinggi antar kartu */
+  min-height: calc(2 * 1.4em);
+  display: none;
+}
+
+/* Fallback non-support (tanpa ellipsis, tetap potong tinggi) */
+@supports not (-webkit-line-clamp: 2){
+  .category-page .product-thumb .caption p{
+    max-height: calc(2 * 1.4em);
+  }
+}
 
     </style>
 
@@ -374,6 +464,16 @@
           });
         }
       });
+
+
+      // Tambah state class berdasarkan keberadaan sidebar
+(function(){
+  var page=document.querySelector('.category-page');
+  if(!page) return;
+  if(document.querySelector('#column-left')) page.classList.add('has-left');
+  if(document.querySelector('#column-right')) page.classList.add('has-right');
+})();
+
 
     </script>
   </head>
@@ -499,182 +599,297 @@
       </div>
     </header>
 
+<!-- CATEGORY PAGE -->
+<div id="product-category" class="container category-page">
+  <!-- Breadcrumb -->
+  <ul class="breadcrumb">
+    <li><a href="https://hejorganic.id/en/"><i class="fa fa-home"></i></a></li>
+    <li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi">Brothmama kaldu & lauk pauk mpasi</a></li>
+  </ul>
 
-    <div id="product-category" class="container category-page">
-      <ul class="breadcrumb">
-        <li><a href="https://hejorganic.id/en/"><i class="fa fa-home"></i></a></li>
-        <li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi">Brothmama kaldu &amp; lauk pauk mpasi</a></li>
-      </ul>
-      <div class="row"><aside id="column-left" class="hidden-xs">
-        <div class="list-group-title">Categories</div>
-        <div class="list-group">
-          <a href="https://hejorganic.id/en/meat-stock-hazmina-meals" class="list-group-item">Meat stock hazmina meals</a>
-          <a href="https://hejorganic.id/en/vitamin,-immune-support-probiotik" class="list-group-item">Vitamin, immune support &amp; probiotik</a>
-          <a href="https://hejorganic.id/en/natural-healing-oil-massage-and-therapy" class="list-group-item">Natural healing oil massage &amp; therapy</a>
+  <div class="row">
+    <!-- Sidebar -->
+    <aside id="column-left" class="col-sm-3 hidden-xs category-sidebar">
+      <div class="list-group-title">Categories</div>
+      <div class="list-group">
+        <a href="https://hejorganic.id/en/meat-stock-hazmina-meals" class="list-group-item">Meat stock hazmina meals</a>
+        <a href="https://hejorganic.id/en/vitamin,-immune-support-probiotik" class="list-group-item">Vitamin, immune support & probiotik</a>
+        <a href="https://hejorganic.id/en/natural-healing-oil-massage-and-therapy" class="list-group-item">Natural healing oil massage & therapy</a>
+        <a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi" class="list-group-item active">Brothmama kaldu & lauk pauk mpasi</a>
+        <a href="https://hejorganic.id/en/lauk-pauk-and-snack-tanpa-telur" class="list-group-item">Lauk pauk & snack tanpa telur</a>
+        <a href="https://hejorganic.id/en/nutriti" class="list-group-item">Nutriti</a>
+        <a href="https://hejorganic.id/en/benourish" class="list-group-item">Benourish</a>
+        <a href="https://hejorganic.id/en/macaramel-kids" class="list-group-item">Macaramel Kids</a>
+        <a href="https://hejorganic.id/en/trf-homemade" class="list-group-item">Trf homemade</a>
+        <a href="https://hejorganic.id/en/mpasi-corner" class="list-group-item">Mpasi corner</a>
+        <a href="https://hejorganic.id/en/produk-mpasi-lainnya-lemak-baik-dll" class="list-group-item">Produk Mpasi lainnya (lemak baik dll)</a>
+        <a href="https://hejorganic.id/en/protein-hewani-mpasi-and-dewasa-mentah" class="list-group-item">Protein hewani mpasi & dewasa ( mentah )</a>
+        <a href="https://hejorganic.id/en/cooking-needs" class="list-group-item">Cooking Needs</a>
+        <a href="https://hejorganic.id/en/mie-and-pasta-gluten-free" class="list-group-item">Mie & pasta gluten free</a>
+        <a href="https://hejorganic.id/en/tepung-gluten-free" class="list-group-item">Tepung gluten free</a>
+        <a href="https://hejorganic.id/en/snack-gluten-free-frozen-lauk-matang" class="list-group-item">Snack gluten free frozen & lauk matang</a>
+        <a href="https://hejorganic.id/en/snack-gluten-free-kering" class="list-group-item">Snack gluten free kering</a>
+        <a href="https://hejorganic.id/en/raw-cow-goat-milk,-yoghurt-grassfed" class="list-group-item">Raw cow & goat milk, yoghurt grassfed</a>
+        <a href="https://hejorganic.id/en/ice-cream-gelato-gluten-free" class="list-group-item">Ice cream & gelato gluten free</a>
+        <a href="https://hejorganic.id/en/perawatan-kecantikan" class="list-group-item">Perawatan & Kecantikan</a>
+        <a href="https://hejorganic.id/en/perlengkapan-rumah" class="list-group-item">Perlengkapan Rumah</a>
+        <a href="https://hejorganic.id/en/raw-milk" class="list-group-item">Raw milk</a>
+        <a href="https://hejorganic.id/en/gelato-ice-cream-probiotic" class="list-group-item">Gelato Ice Cream Probiotic</a>
+        <a href="https://hejorganic.id/en/kids-meal" class="list-group-item">Kids Meal</a>
+        <a href="https://hejorganic.id/en/organic-chicken-egg" class="list-group-item">Organic Chicken Egg</a>
+        <a href="https://hejorganic.id/en/ready-to-eat" class="list-group-item">Ready to eat</a>
+        <a href="https://hejorganic.id/en/healthy-fat" class="list-group-item">Healthy fat</a>
+        <a href="https://hejorganic.id/en/oil" class="list-group-item">Oil</a>
+        <a href="https://hejorganic.id/en/tea" class="list-group-item">Tea</a>
+        <a href="https://hejorganic.id/en/powder" class="list-group-item">Powder</a>
+        <a href="https://hejorganic.id/en/grains-seeds-nuts-beans-activated-non-activated" class="list-group-item">Grains seeds nuts beans activated non activated</a>
+        <a href="https://hejorganic.id/en/natural-jam-spread-salad-dressing" class="list-group-item">Natural jam spread salad dressing</a>
+        <a href="https://hejorganic.id/en/probiotic" class="list-group-item">Probiotic</a>
+        <a href="https://hejorganic.id/en/supplement" class="list-group-item">Supplement</a>
+        <a href="https://hejorganic.id/en/raw-honey" class="list-group-item">Raw Honey</a>
+        <a href="https://hejorganic.id/en/gluten-free-snack" class="list-group-item">Gluten free snack</a>
+        <a href="https://hejorganic.id/en/sauce-condiment" class="list-group-item">Sauce Condiment</a>
+        <a href="https://hejorganic.id/en/natural-mineral-water" class="list-group-item">Natural mineral water</a>
+        <a href="https://hejorganic.id/en/noodles-pasta-gluten-free" class="list-group-item">Noodles Pasta Gluten Free</a>
+        <a href="https://hejorganic.id/en/request-customer" class="list-group-item">Request customer</a>
+        <a href="https://hejorganic.id/en/natural-salt" class="list-group-item">Natural salt</a>
+        <a href="https://hejorganic.id/en/lotion" class="list-group-item">Lotion</a>
+        <a href="https://hejorganic.id/en/sweetener" class="list-group-item">Sweetener</a>
+        <a href="https://hejorganic.id/en/gluten-free-frozen-ready-to-eat" class="list-group-item">Gluten free frozen ready to eat</a>
+        <a href="https://hejorganic.id/en/dried-fruits" class="list-group-item">Dried Fruits</a>
+        <a href="https://hejorganic.id/en/beauty-bath-personal-care" class="list-group-item">Beauty bath personal care</a>
+        <a href="https://hejorganic.id/en/herb-spices-sauces-and-condiments" class="list-group-item">Herb spices sauces and condiments</a>
+        <a href="https://hejorganic.id/en/mpasi-baby-meal-and-baby-dish" class="list-group-item">Mpasi baby meal and baby dish</a>
+        <a href="https://hejorganic.id/en/herbal" class="list-group-item">Herbal</a>
+        <a href="https://hejorganic.id/en/lemon" class="list-group-item">Lemon</a>
+        <a href="https://hejorganic.id/en/kroket-meat-liver" class="list-group-item">Kroket meat liver</a>
+        <a href="https://hejorganic.id/en/organic-whole-chicken" class="list-group-item">Organic Whole Chicken</a>
+        <a href="https://hejorganic.id/en/organic-local-beef-70-grassfed" class="list-group-item">Organic Local Beef 70 Grassfed</a>
+        <a href="https://hejorganic.id/en/organic-100-grassfed-beef" class="list-group-item">Organic 100 Grassfed Beef</a>
+        <a href="https://hejorganic.id/en/fish-seafood" class="list-group-item">Fish Seafood</a>
+        <a href="https://hejorganic.id/en/gluten-free-snack-frozen" class="list-group-item">Gluten Free Snack Frozen</a>
+        <a href="https://hejorganic.id/en/sourdough" class="list-group-item">Sourdough</a>
+        <a href="https://hejorganic.id/en/bath-salt" class="list-group-item">Bath Salt</a>
+        <a href="https://hejorganic.id/en/buah--buahan" class="list-group-item">Buah - Buahan</a>
+        <a href="https://hejorganic.id/en/permen-anak" class="list-group-item">Permen anak</a>
+      </div>
+    </aside>
 
-          <a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi" class="list-group-item active">Brothmama kaldu &amp; lauk pauk mpasi</a>
-          <a href="https://hejorganic.id/en/lauk-pauk-and-snack-tanpa-telur" class="list-group-item">Lauk pauk &amp; snack tanpa telur</a>
-          <a href="https://hejorganic.id/en/nutriti" class="list-group-item">Nutriti</a>
-          <a href="https://hejorganic.id/en/benourish" class="list-group-item">Benourish</a>
-          <a href="https://hejorganic.id/en/macaramel-kids" class="list-group-item">Macaramel Kids</a>
-          <a href="https://hejorganic.id/en/trf-homemade" class="list-group-item">Trf homemade</a>
-          <a href="https://hejorganic.id/en/mpasi-corner" class="list-group-item">Mpasi corner</a>
-          <a href="https://hejorganic.id/en/produk-mpasi-lainnya-lemak-baik-dll" class="list-group-item">Produk Mpasi lainnya (lemak baik dll)</a>
-          <a href="https://hejorganic.id/en/protein-hewani-mpasi-and-dewasa-mentah" class="list-group-item">Protein hewani mpasi &amp; dewasa ( mentah )</a>
-          <a href="https://hejorganic.id/en/cooking-needs" class="list-group-item">Cooking Needs</a>
-          <a href="https://hejorganic.id/en/mie-and-pasta-gluten-free" class="list-group-item">Mie &amp; pasta gluten free</a>
-          <a href="https://hejorganic.id/en/tepung-gluten-free" class="list-group-item">Tepung gluten free</a>
-          <a href="https://hejorganic.id/en/snack-gluten-free-frozen-lauk-matang" class="list-group-item">Snack gluten free frozen &amp; lauk matang</a>
-          <a href="https://hejorganic.id/en/snack-gluten-free-kering" class="list-group-item">Snack gluten free kering</a>
-          <a href="https://hejorganic.id/en/raw-cow-goat-milk,-yoghurt-grassfed" class="list-group-item">Raw cow &amp; goat milk, yoghurt grassfed</a>
-          <a href="https://hejorganic.id/en/ice-cream-gelato-gluten-free" class="list-group-item">Ice cream &amp; gelato gluten free</a>
-          <a href="https://hejorganic.id/en/perawatan-kecantikan" class="list-group-item">Perawatan &amp; Kecantikan</a>
-          <a href="https://hejorganic.id/en/perlengkapan-rumah" class="list-group-item">Perlengkapan Rumah</a>
-          <a href="https://hejorganic.id/en/raw-milk" class="list-group-item">Raw milk</a>
-          <a href="https://hejorganic.id/en/gelato-ice-cream-probiotic" class="list-group-item">Gelato Ice Cream Probiotic</a>
-          <a href="https://hejorganic.id/en/kids-meal" class="list-group-item">Kids Meal</a>
-          <a href="https://hejorganic.id/en/organic-chicken-egg" class="list-group-item">Organic Chicken Egg</a>
-          <a href="https://hejorganic.id/en/ready-to-eat" class="list-group-item">Ready to eat</a>
-          <a href="https://hejorganic.id/en/healthy-fat" class="list-group-item">Healthy fat</a>
-          <a href="https://hejorganic.id/en/oil" class="list-group-item">Oil</a>
-          <a href="https://hejorganic.id/en/tea" class="list-group-item">Tea</a>
-          <a href="https://hejorganic.id/en/powder" class="list-group-item">Powder</a>
-          <a href="https://hejorganic.id/en/grains-seeds-nuts-beans-activated-non-activated" class="list-group-item">Grains seeds nuts beans activated non activated</a>
-          <a href="https://hejorganic.id/en/natural-jam-spread-salad-dressing" class="list-group-item">Natural jam spread salad dressing</a>
-          <a href="https://hejorganic.id/en/probiotic" class="list-group-item">Probiotic</a>
-          <a href="https://hejorganic.id/en/supplement" class="list-group-item">Supplement</a>
-          <a href="https://hejorganic.id/en/raw-honey" class="list-group-item">Raw Honey</a>
-          <a href="https://hejorganic.id/en/gluten-free-snack" class="list-group-item">Gluten free snack</a>
-          <a href="https://hejorganic.id/en/sauce-condiment" class="list-group-item">Sauce Condiment</a>
-          <a href="https://hejorganic.id/en/natural-mineral-water" class="list-group-item">Natural mineral water</a>
-          <a href="https://hejorganic.id/en/noodles-pasta-gluten-free" class="list-group-item">Noodles Pasta Gluten Free</a>
-          <a href="https://hejorganic.id/en/request-customer" class="list-group-item">Request customer</a>
-          <a href="https://hejorganic.id/en/natural-salt" class="list-group-item">Natural salt</a>
-          <a href="https://hejorganic.id/en/lotion" class="list-group-item">Lotion</a>
-          <a href="https://hejorganic.id/en/sweetener" class="list-group-item">Sweetener</a>
-          <a href="https://hejorganic.id/en/gluten-free-frozen-ready-to-eat" class="list-group-item">Gluten free frozen ready to eat</a>
-          <a href="https://hejorganic.id/en/dried-fruits" class="list-group-item">Dried Fruits</a>
-          <a href="https://hejorganic.id/en/beauty-bath-personal-care" class="list-group-item">Beauty bath personal care</a>
-          <a href="https://hejorganic.id/en/herb-spices-sauces-and-condiments" class="list-group-item">Herb spices sauces and condiments</a>
-          <a href="https://hejorganic.id/en/mpasi-baby-meal-and-baby-dish" class="list-group-item">Mpasi baby meal and baby dish</a>
-          <a href="https://hejorganic.id/en/herbal" class="list-group-item">Herbal</a>
-          <a href="https://hejorganic.id/en/lemon" class="list-group-item">Lemon</a>
-          <a href="https://hejorganic.id/en/kroket-meat-liver" class="list-group-item">Kroket meat liver</a>
-          <a href="https://hejorganic.id/en/organic-whole-chicken" class="list-group-item">Organic Whole Chicken</a>
-          <a href="https://hejorganic.id/en/organic-local-beef-70-grassfed" class="list-group-item">Organic Local Beef 70 Grassfed</a>
-          <a href="https://hejorganic.id/en/organic-100-grassfed-beef" class="list-group-item">Organic 100 Grassfed Beef</a>
-          <a href="https://hejorganic.id/en/fish-seafood" class="list-group-item">Fish Seafood</a>
-          <a href="https://hejorganic.id/en/gluten-free-snack-frozen" class="list-group-item">Gluten Free Snack Frozen</a>
-          <a href="https://hejorganic.id/en/sourdough" class="list-group-item">Sourdough</a>
-          <a href="https://hejorganic.id/en/bath-salt" class="list-group-item">Bath Salt</a>
-          <a href="https://hejorganic.id/en/buah--buahan" class="list-group-item">Buah - Buahan</a>
-          <a href="https://hejorganic.id/en/permen-anak" class="list-group-item">Permen anak</a>
+    <!-- Content -->
+    <div id="content" class="col-sm-9">
+      <header class="category-header">
+        <div class="category-title-wrap">
+          <h1 class="category-title">Brothmama kaldu & lauk pauk mpasi</h1>
+          <p class="category-sub">Pilihan lauk & kaldu MPASI yang bersih, praktis, dan bernutrisi.</p>
         </div>
+        <div class="category-media">
+          <img src="https://hejorganic.id/image/cache/catalog/categories/brothmama-80x80.png"
+               alt="Brothmama kaldu & lauk pauk mpasi" class="img-thumbnail">
+        </div>
+      </header>
 
-        </aside>
-
-        <div id="content">
-          <h2>Brothmama kaldu &amp; lauk pauk mpasi</h2>
-
-          <div class="category-info">
-            <div class="row">           <div class="col-sm-12"><img src="https://hejorganic.id/image/cache/catalog/categories/brothmama-80x80.png" alt="Brothmama kaldu &amp; lauk pauk mpasi" title="Brothmama kaldu &amp; lauk pauk mpasi" class="img-thumbnail"></div>
-            </div>
+      <!-- Toolbar -->
+      <div class="category-toolbar">
+        <div class="toolbar-left hidden-xs">
+          <div class="btn-group btn-group-sm view-switch">
+            <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
+            <button type="button" id="grid-view" class="btn btn-default active" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
           </div>
-
-          <hr>
-
-
-          <div class="products-collection">
-
-            <div class="row">
-              <div class="col-md-2 col-sm-6 hidden-xs">
-                <div class="btn-group btn-group-sm">
-                  <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="" data-original-title="List"><i class="fa fa-th-list"></i></button>
-                  <button type="button" id="grid-view" class="btn btn-default active" data-toggle="tooltip" title="" data-original-title="Grid"><i class="fa fa-th"></i></button>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="form-group"><a href="https://demo00.opencart.id/index.php?route=product/compare" id="compare-total" class="btn btn-link">Product Compare (0)</a></div>
-              </div>
-              <div class="col-md-4 col-xs-6">
-                <div class="form-group input-group input-group-sm">
-                  <label class="input-group-addon" for="input-sort">Sort By:</label>
-                  <select id="input-sort" class="form-control" onchange="location = this.value;">
-                    <option value="https://demo00.opencart.id/smartphone?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                    <option value="https://demo00.opencart.id/smartphone?sort=p.model&amp;order=DESC">Model (Z - A)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 col-xs-6">
-                <div class="form-group input-group input-group-sm">
-                  <label class="input-group-addon" for="input-limit">Show:</label>
-                  <select id="input-limit" class="form-control" onchange="location = this.value;">
-                    <option value="https://demo00.opencart.id/smartphone?limit=15" selected="selected">15</option>
-                    <option value="https://demo00.opencart.id/smartphone?limit=25">25</option>
-                    <option value="https://demo00.opencart.id/smartphone?limit=50">50</option>
-                    <option value="https://demo00.opencart.id/smartphone?limit=75">75</option>
-                    <option value="https://demo00.opencart.id/smartphone?limit=100">100</option>
-                  </select>
-                </div>
-              </div>
+          <a href="https://demo00.opencart.id/index.php?route=product/compare" id="compare-total" class="btn btn-link btn-sm">Product Compare (0)</a>
+        </div>
+        <div class="toolbar-right">
+          <div class="form-inline">
+            <div class="form-group">
+              <label for="input-sort" class="control-label">Sort:</label>
+              <select id="input-sort" class="form-control input-sm" onchange="location=this.value;">
+                <option value="https://demo00.opencart.id/smartphone?sort=p.sort_order&order=ASC" selected>Default</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=pd.name&order=ASC">Name (A - Z)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=pd.name&order=DESC">Name (Z - A)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=p.price&order=ASC">Price (Low &gt; High)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=p.price&order=DESC">Price (High &gt; Low)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=rating&order=DESC">Rating (Highest)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=rating&order=ASC">Rating (Lowest)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=p.model&order=ASC">Model (A - Z)</option>
+                <option value="https://demo00.opencart.id/smartphone?sort=p.model&order=DESC">Model (Z - A)</option>
+              </select>
             </div>
-
-
-            <div class="row">
-              <div class="product-layout product-grid">
-                <div class="product-thumb">
-                  <div class="image"><a href="https://demo00.opencart.id/smartphone/digital-product"><img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" title="Digital Product" class="img-responsive"></a></div>
-                  <div>
-                    <div class="caption">
-                      <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
-                      <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
-                      <p class="price">  <span class="price-new">Rp1,499,900</span> <span class="price-old">Rp1,500,000</span>                    <span class="price-tax">Ex Tax: Rp1,499,900</span>  </p>
-                    </div>
-                    <div class="button-group">
-                      <button type="button" onclick="cart.add('40', '1');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-                      <button type="button" data-toggle="tooltip" title="" onclick="wishlist.add('40');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="" onclick="compare.add('40');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="product-layout product-grid">
-                <div class="product-thumb">
-                  <div class="image"><a href="https://demo00.opencart.id/smartphone/iphone"><img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="iPhone" title="iPhone" class="img-responsive"></a></div>
-                  <div>
-                    <div class="caption">
-                      <h4><a href="https://demo00.opencart.id/smartphone/iphone">iPhone</a></h4>
-                      <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
-                      <p class="price">  <span class="price-new">Rp1,499,900</span> <span class="price-old">Rp1,500,000</span>                    <span class="price-tax">Ex Tax: Rp1,499,900</span>  </p>
-                    </div>
-                    <div class="button-group">
-                      <button type="button" onclick="cart.add('50', '1');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-                      <button type="button" data-toggle="tooltip" title="" onclick="wishlist.add('50');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="" onclick="compare.add('50');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+            <div class="form-group">
+              <label for="input-limit" class="control-label">Show:</label>
+              <select id="input-limit" class="form-control input-sm" onchange="location=this.value;">
+                <option value="https://demo00.opencart.id/smartphone?limit=15" selected>15</option>
+                <option value="https://demo00.opencart.id/smartphone?limit=25">25</option>
+                <option value="https://demo00.opencart.id/smartphone?limit=50">50</option>
+                <option value="https://demo00.opencart.id/smartphone?limit=75">75</option>
+                <option value="https://demo00.opencart.id/smartphone?limit=100">100</option>
+              </select>
             </div>
-
-            <div class="row">
-              <div class="text-left"><ul class="pagination"><li class="active"><span>1</span></li><li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">2</a></li><li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">&gt;</a></li><li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">&gt;|</a></li></ul></div>
-              <div class="text-right">Showing 1 to 15 of 27 (2 Pages)</div>
-            </div>
-
+            <button type="button" class="btn btn-default btn-sm visible-xs" id="toggle-filter">Filter</button>
           </div>
-
         </div>
       </div>
+
+      <!-- Products -->
+      <div class="products-grid" id="products-grid">
+        <!-- Compatible with old OpenCart markup -->
+        <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+              </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+
+     <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+              </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+             <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+              </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+             <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+             </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+             <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+             </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+             <div class="product-layout product-grid">
+          <div class="product-thumb">
+            <div class="image">
+              <a href="https://demo00.opencart.id/smartphone/digital-product">
+                <img src="https://demo00.opencart.id/image/cache/catalog/demo/iphone_1-228x228.jpg" alt="Digital Product" class="img-responsive">
+              </a>
+            </div>
+            <div class="caption">
+              <h4><a href="https://demo00.opencart.id/smartphone/digital-product">Digital Product</a></h4>
+              <p>iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..</p>
+              <div class="price">
+                <span class="price-new">Rp1,499,900</span>
+                <span class="price-old">Rp1,500,000</span>
+                <span class="price-tax">Ex Tax: Rp1,499,900</span>
+              </div>
+            </div>
+            <div class="button-group">
+              <button class="button-cart" type="button" onclick="cart.add('40','1');"><i class="fa fa-shopping-cart"></i> <span>Buy</span></button>
+              <button class="button-wishlist" type="button" data-toggle="tooltip" title="Tambah ke Favorit" onclick="wishlist.add('40');"><i class="fa fa-heart"></i></button>
+              <button class="button-compare" type="button" data-toggle="tooltip" title="Bandingkan" onclick="compare.add('40');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- more items... -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="category-pagination">
+        <div class="pager-left">
+          <ul class="pagination">
+            <li class="active"><span>1</span></li>
+            <li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">2</a></li>
+            <li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">&gt;</a></li>
+            <li><a href="https://hejorganic.id/en/brothmama-kaldu-and-lauk-pauk-mpasi?page=2">&gt;|</a></li>
+          </ul>
+        </div>
+        <div class="pager-right">Showing 1 to 15 of 27 (2 Pages)</div>
+      </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Footer -->
     <footer class="footer-section section">
