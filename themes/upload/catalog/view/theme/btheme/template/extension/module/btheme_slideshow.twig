@@ -1,0 +1,27 @@
+<section class="hero">
+  <div class="container">
+    <div class="hero-slider" id="heroSlider">
+      {% for slide in slides %}
+      <div class="hero-slide {% if loop.first %}active{% endif %}" data-sub="{{ slide.sub }}">
+        <div class="hero-grid">
+          <div>
+            <h1 class="h-title">{{ slide.title }}</h1>
+            <p class="h-sub">{{ slide.subtitle }}</p>
+            <div class="h-actions">
+              {% if slide.button_text %}
+                <a class="btn btn-primary" href="{{ slide.button_link }}">{{ slide.button_text }}</a>
+              {% endif %}
+              <a class="btn ghost" href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="hero-illus">{{ slide.illus }}</div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <button class="hero-nav prev" aria-label="Previous slide">&#10094;</button>
+      <button class="hero-nav next" aria-label="Next slide">&#10095;</button>
+      <div class="hero-dots" id="heroDots" aria-label="Slide navigation"></div>
+    </div>
+  </div>
+</section>

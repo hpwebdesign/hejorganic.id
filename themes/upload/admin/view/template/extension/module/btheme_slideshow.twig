@@ -1,0 +1,57 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        <li><a href="{{ cancel }}">{{ text_extension }}</a></li>
+        <li>{{ heading_title }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+      <div id="slides" class="card card-body bg-light">
+        <h3>{{ text_slides }}</h3>
+        <div id="slides-list">
+          {% for slide in slides %}
+            <div class="slide-item card card-body mb-3">
+              <input type="text" name="slides[{{ loop.index0 }}][title]" value="{{ slide.title }}" placeholder="Title" class="form-control mb-2"/>
+              <input type="text" name="slides[{{ loop.index0 }}][subtitle]" value="{{ slide.subtitle }}" placeholder="Subtitle" class="form-control mb-2"/>
+              <input type="text" name="slides[{{ loop.index0 }}][button_text]" value="{{ slide.button_text }}" placeholder="Button Text" class="form-control mb-2"/>
+              <input type="text" name="slides[{{ loop.index0 }}][button_link]" value="{{ slide.button_link }}" placeholder="Button Link" class="form-control mb-2"/>
+              <input type="text" name="slides[{{ loop.index0 }}][illus]" value="{{ slide.illus }}" placeholder="Illustration Text" class="form-control mb-2"/>
+              <input type="text" name="slides[{{ loop.index0 }}][sub]" value="{{ slide.sub }}" placeholder="Sub Description" class="form-control mb-2"/>
+              <button type="button" class="btn btn-danger remove-slide">Remove</button>
+            </div>
+          {% endfor %}
+        </div>
+        <button type="button" id="add-slide" class="btn btn-primary mt-2">+ Add Slide</button>
+      </div>
+      <div class="mt-3">
+        <button type="submit" class="btn btn-success">{{ button_save }}</button>
+        <a href="{{ cancel }}" class="btn btn-default">{{ button_cancel }}</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+$('#add-slide').on('click', function(){
+  var index = $('#slides-list .slide-item').length;
+  var html = `
+  <div class="slide-item card card-body mb-3">
+    <input type="text" name="slides[`+index+`][title]" placeholder="Title" class="form-control mb-2"/>
+    <input type="text" name="slides[`+index+`][subtitle]" placeholder="Subtitle" class="form-control mb-2"/>
+    <input type="text" name="slides[`+index+`][button_text]" placeholder="Button Text" class="form-control mb-2"/>
+    <input type="text" name="slides[`+index+`][button_link]" placeholder="Button Link" class="form-control mb-2"/>
+    <input type="text" name="slides[`+index+`][illus]" placeholder="Illustration Text" class="form-control mb-2"/>
+    <input type="text" name="slides[`+index+`][sub]" placeholder="Sub Description" class="form-control mb-2"/>
+    <button type="button" class="btn btn-danger remove-slide">Remove</button>
+  </div>`;
+  $('#slides-list').append(html);
+});
+$(document).on('click', '.remove-slide', function(){
+  $(this).closest('.slide-item').remove();
+});
+</script>
+{{ footer }}
