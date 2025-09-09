@@ -1,0 +1,40 @@
+{% if currencies|length > 1 %}
+<div class="lang-current-switch btn-group" id="lang-current-switch">
+  <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency">
+    <div class="btn-group">
+      <button class="btn btn-link dropdown-toggle lang-current" data-bs-toggle="dropdown">
+        {% for currency in currencies %}
+          {% if currency.code == code %}
+            <strong>{{ currency.symbol_left ? currency.symbol_left : currency.symbol_right }}</strong>
+            <span class="d-none d-lg-inline">{{ text_currency }}</span>
+          {% endif %}
+        {% endfor %}
+        &nbsp;<i class="chevron"></i>
+      </button>
+
+      <ul class="dropdown-menu lang-current-menu">
+        {% for currency in currencies %}
+          <li>
+            <button class="currency-select btn btn-link btn-block lang-current-option" type="button" name="{{ currency.code }}">
+              {{ currency.symbol_left ? currency.symbol_left : currency.symbol_right }} {{ currency.title }}
+            </button>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <input type="hidden" name="code" value="" />
+    <input type="hidden" name="redirect" value="{{ redirect }}" />
+  </form>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#form-currency .currency-select').on('click', function(e) {
+    e.preventDefault();
+    $('#form-currency input[name="code"]').val($(this).attr('name'));
+    $('#form-currency').submit();
+  });
+});
+</script>
+{% endif %} 

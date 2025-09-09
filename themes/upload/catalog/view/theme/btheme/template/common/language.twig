@@ -1,0 +1,40 @@
+{% if languages|length > 1 %}
+<div class="lang-current-switch btn-group" id="lang-current-switch">
+  <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-language">
+    <div class="btn-group">
+      <button class="btn btn-link dropdown-toggle lang-current" data-bs-toggle="dropdown">
+        {% for language in languages %}
+          {% if language.code == code %}
+            <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}" title="{{ language.name }}">
+            <span class="d-none d-lg-inline">{{ text_language }}</span>
+          {% endif %}
+        {% endfor %}
+        &nbsp;<i class="chevron"></i>
+      </button>
+
+      <ul class="dropdown-menu lang-current-menu">
+        {% for language in languages %}
+          <li>
+            <button class="btn btn-link btn-block language-select lang-current-option" type="button" name="{{ language.code }}">
+              <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}" title="{{ language.name }}"> {{ language.name }}
+            </button>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <input type="hidden" name="code" value="" />
+    <input type="hidden" name="redirect" value="{{ redirect }}" />
+  </form>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#form-language .language-select').on('click', function(e) {
+    e.preventDefault();
+    $('#form-language input[name="code"]').val($(this).attr('name'));
+    $('#form-language').submit();
+  });
+});
+</script>
+{% endif %}

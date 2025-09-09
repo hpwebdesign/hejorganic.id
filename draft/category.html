@@ -89,8 +89,8 @@
 /* Sidebar */
 .category-page .category-sidebar { position:relative; }
 .category-page .list-group-title{
-  font-weight:600; font-size:14px; color:var(--fg,#1f2937);
-  margin:0 0 8px; padding:10px 12px; background:#fff; border:1px solid var(--line); border-radius: var(--m-border-radius,8px);
+  font-weight:400; font-size:24px; color:#111;
+  margin:0 0 8px; padding:20px; border-radius: var(--m-border-radius,8px);
 }
 .category-page .list-group{ overflow:auto; border:1px solid var(--line); border-radius: var(--m-border-radius,8px); }
 .category-page .list-group-item{
@@ -435,7 +435,50 @@
     max-height: calc(2 * 1.4em);
   }
 }
+.category-sidebar .list-group {
+  border: 1px solid #e0e0e0;
+  margin-bottom: 30px !important;
+  padding-left: 0;
+}
 
+.category-sidebar .list-group-item {
+  border: none;
+  background: transparent !important;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 20px;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease, color 0.2s ease;
+  color: #666;
+  position: relative;
+  font-size: 13px;
+  text-transform: capitalize;
+  border-left: 2px solid transparent;
+}
+
+.category-sidebar .list-group-item:last-child {
+  border-bottom: none;
+}
+
+.category-sidebar .list-group-item:hover {
+  color: var(--brand);
+  background: transparent;
+  border-left: 2px solid var(--brand);
+}
+
+.category-sidebar .list-group-item.active {
+  color: var(--brand);
+  background: transparent;
+  border-left: 2px solid var(--brand);
+}
+
+.category-sidebar .list-group-item::after {
+  content: "\203A";
+  font-size: 16px;
+  color: inherit;
+}
     </style>
 
     <script>

@@ -1,0 +1,97 @@
+ /* --- List layout: flex-wrap with fixed 20px gaps; items grow but cap at 400px --- */
+            .product-list{
+              display:flex;              /* use flex for natural grow/shrink */
+              flex-wrap:wrap;            /* allow multiple rows */
+              gap:20px;                  /* fixed horizontal & vertical spacing */
+              justify-content:flex-start;/* no extra spacing beyond the 20px gap */
+              align-items:stretch;       /* consistent height per row */
+              list-style:none;
+              margin:0; padding:0;
+            }
+
+            /* --- Card sizing: fill available width, but never exceed 400px --- */
+            .product-item{
+              flex:1 1 280px;            /* grow=1, shrink=1, preferred width ~280px */
+              max-width:400px;           /* hard cap for desktop expansion */
+              width:100%;                /* fill its flex track */
+              position:relative;
+              display:grid;              /* internal layout: image + content */
+              grid-template-columns:96px 1fr;
+              gap:14px;
+
+              border:1px solid var(--ring, var(--line, #e7ebf2));
+              border-radius:var(--radius,16px);
+              background:var(--card-bg, transparent); /* keep page bg untouched */
+              box-shadow:var(--shadow, 0 8px 24px rgba(15,21,53,.06));
+              padding:12px;
+              transition:transform .15s ease, box-shadow .15s ease;
+              color:var(--fg, #0a0f1e);
+            }
+            .product-item:hover{
+              transform:translateY(-2px);
+              box-shadow:0 10px 26px rgba(15,21,53,.09),0 4px 10px rgba(15,21,53,.08);
+            }
+
+            /* --- Image --- */
+            .product-image {
+              width:96px; height:96px; border-radius:12px; object-fit:cover;
+            }
+            @media (min-width:576px){
+              .product-image{width:110px; height:110px}
+            }
+
+            /* --- Badge --- */
+            .product-badge{
+              position:absolute; left:12px; top:10px;
+              padding:4px 10px; border-radius:999px;
+              font-size:.72rem; font-weight:700;
+              background:linear-gradient(90deg, var(--brand, #7c8d5a), var(--brand-500, var(--brand, #7c8d5a)));
+              color:var(--chip-text, #fff);
+            }
+            .product-badge.chip{
+              background:var(--chip-bg, var(--brand, #7c8d5a));
+              color:var(--chip-text, #fff);
+            }
+
+            /* --- Texts --- */
+            .product-title{
+              margin:2px 0 6px; font-weight:800; line-height:1.25;
+              letter-spacing:.2px; text-transform:uppercase; font-size:1.2rem;
+              color:var(--fg, #0a0f1e);
+            }
+            .product-price{
+              display:flex; align-items:center; gap:8px; font-size:1.3rem;
+            }
+            .price-now{font-weight:800; color:var(--fg, #0a0f1e)}
+            .price-was{color:var(--muted, #7b8296); text-decoration:line-through}
+
+            /* --- Button --- */
+            .product-actions{margin-top:10px}
+            .btn-buy{
+              border:1px solid var(--brand, #7c8d5a);
+              background:var(--brand, #7c8d5a);
+              color:#fff; border-radius:10px;
+              padding:6px 14px; font-weight:700; font-size:1.3rem;
+            }
+            .btn-buy:hover{
+              background:var(--brand-500, var(--brand, #7c8d5a));
+              border-color:var(--brand-500, var(--brand, #7c8d5a));
+            }
+
+            /* --- Single column on phones --- */
+            @media (max-width:576px){
+              .product-item{
+                flex:1 1 100%;           /* one column */
+                max-width:100%;          /* allow full width on small screens */
+              }
+            }
+
+            /* --- Micro tweaks for tiny screens --- */
+            @media (max-width:420px){
+              .product-title{font-size:.9rem}
+              .product-badge{font-size:.68rem}
+            }
+
+            .product-list .product-detail {
+              padding-left: 10px;
+            }

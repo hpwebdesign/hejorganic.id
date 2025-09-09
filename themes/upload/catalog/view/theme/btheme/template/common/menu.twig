@@ -1,0 +1,71 @@
+      <label for="nav-toggle" class="burger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle" hidden>
+
+        <nav class="menu">
+          <a href="">Home</a>
+
+          <!-- 2 kolom -->
+          <div class="dropdown mega">
+            <button class="menu-link dropdown-toggle" type="button">Products</button>
+            <div class="dropdown-menu">
+              <div class="row">
+                <div class="col-sm-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Organic Snacks</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-6">
+                  <ul class="list-unstyled">
+                    <li><a href="#">Cold-Pressed Juice</a></li>
+                    <li><a href="#">Bundles & Kits</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1 kolom -->
+          {% if categories %}
+              <div class="dropdown category-menu">
+                <button class="btn btn-link menu-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ text_category }}
+                </button>
+
+                <ul class="dropdown-menu">
+                  {% for category in categories %}
+                    {% if category.children %}
+                      <li class="dropdown-submenu">
+                        <a href="{{ category.href }}" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
+                          {{ category.name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                          {% for children in category.children|batch((category.children|length / category.column)|round(1, 'ceil')) %}
+                            <li>
+                              <ul class="list-unstyled">
+                                {% for child in children %}
+                                  <li><a class="dropdown-item" href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                              </ul>
+                            </li>
+                          {% endfor %}
+                          <li><a href="{{ category.href }}" class="dropdown-item see-all">{{ text_all }} {{ category.name }}</a></li>
+                        </ul>
+                      </li>
+                    {% else %}
+                      <li><a class="dropdown-item" href="{{ category.href }}">{{ category.name }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+          {% endif %}
+
+
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a class="cta-btn" href="#">Shop Now</a>
+        </nav>

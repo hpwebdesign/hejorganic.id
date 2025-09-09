@@ -1,0 +1,75 @@
+<footer class="footer-section section">
+  <div class="container">
+    <!-- Brand -->
+    <div class="footer-col footer-brand media">
+      <img src="catalog/view/theme/btheme/image/logo.png" alt="{{ name }}" class="footer-logo media-left">
+      <div class="brand-body">
+        <h4 class="footer-title">{{ name }}</h4>
+
+        <p>Hey!<br>
+          We provide digestive friendly products that you can choose according to your needs
+        </p>
+        <p>
+          Hej Organic is an organic store that not only provides organic and natural products, 
+          but ensures that the vendors available at our store are of the highest quality to be 
+          able to deliver the best products to consumers' hands.
+        </p>
+        <p>
+          A wide selection of products is available to support a healthy life, starting from 
+          animal fats, grassfed beef, organic chicken, dairy, kitchen needs, herbal needs and 
+          also bath &amp; personal care. Check out our catalog for other digestive friendly products.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="footer-social">
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-envelope"></i></a>
+          <a href="#"><i class="fa fa-shopping-bag"></i></a>
+          <a href="#"><i class="fa fa-gift"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shop Links -->
+    <div class="footer-col footer-links">
+      <div class="footer-link-group">
+        <h3 class="footer-title">SHOP</h3>
+        <ul class="list-unstyled footer-link-list">
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Digestive Friendly</a></li>
+          <li><a href="#">Bath &amp; Personal Care</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Customer Service -->
+    <div class="footer-col">
+      <h3 class="footer-title">CUSTOMER SERVICE</h3>
+      <p>Call Us : <a href="tel:089618502301">089618502301</a></p>
+      <p>Monday - Saturday 09:00 WIB - 17:00 WIB<br>Sunday Closed</p>
+    </div>
+
+    <!-- Payments -->
+    <div class="footer-col footer-payments">
+      <h3 class="footer-title">PAYMENTS</h3>
+      <img src="catalog/view/theme/btheme/image/payment-logos.png" alt="Payments"/>
+    </div>
+  </div>
+</footer>
+
+<footer class="footer-bottom bg-dark text-white py-3">
+  <div class="container text-center">
+    {{ powered }}
+  </div>
+</footer>
+
+
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+
+</body></html>
