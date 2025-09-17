@@ -973,8 +973,8 @@ justify-content:space-evenly;
 .brand img {
     height: 50px;
 }
-/* Marque */
 
+/*MARQUE*/
 .marquee-line {
     width: 100%;
     overflow: hidden;
@@ -986,11 +986,12 @@ justify-content:space-evenly;
 }
 .marquee-line .container {
     overflow: hidden;
-    /* batasi area teks */
     white-space: nowrap;
 }
 .marquee-content {
     display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
 }
 .marquee-content span {
     display: inline-block;
@@ -1003,10 +1004,10 @@ justify-content:space-evenly;
     animation-play-state: paused;
 }
 @keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
+@media (prefers-reduced-motion: reduce) {
+    .is-marquee { animation: none; }
+}
+
