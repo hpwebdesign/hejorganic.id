@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <title>Shopee Product Import</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+
+
+
+    <div class="container" id="import-product">
+      <h1 class="import-title">{{ heading_title }}</h1>
+
+      <form id="frm-import" action="{{ action }}" method="post" class="import-form">
+
+        <div class="form-group">
+          <label class="control-label">Pilih Kategori</label>
+          <select name="category_id" class="form-control select2-category" required>
+            <option value="">-- pilih --</option>
+            {% for c in categories %}
+            <option value="{{ c.category_id }}">{{ c.category_id }} | {{ c.name }}</option>
+            {% endfor %}
+          </select>
+
+          <span class="hint">Copy & Paste kode HTML Shopee di halaman Seller. Klik kategori yang relevant.</span>
+
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Paste HTML</label>
+          <textarea name="raw_html" class="form-control textarea-html" rows="12" placeholder="Paste HTML Shopee di sini" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">🚀 Import</button>
+      </form>
+
+      <pre id="result" class="result-box" style="display:none;"></pre>
+    </div>
+
+    <style>
+  :root{
+    --bg:#f8fafc; --card:#ffffff; --text:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --ok:#065f46; --okbg:#d1fae5; --err:#7f1d1d; --errbg:#fee2e2; --warn:#92400e; --warnbg:#fef3c7;
+    --pri:#2563eb;
+  }
+      .hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+      body {
+        background: var(--bg);
+      }
+      #import-product {
+        max-width: 1200px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,.08);
+        font-family: "Segoe UI", Roboto, sans-serif;
+      }
+      #import-product .import-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+        color: #333;
+      }
+      #import-product .form-group {
+        margin-bottom: 18px;
+      }
+      #import-product .control-label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        display: block;
+        color: #444;
+      }
+      #import-product .form-control {
+        width: 100%;
+/*        padding: 10px 12px;*/
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color .2s;
+      }
+      #import-product .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      #import-product .textarea-html {
+        font-family: monospace;
+        min-height: 200px;
+      }
+      #import-product .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 15px;
+        border-radius: 5px;
+        transition: background .2s;
+      }
+      #import-product .btn-primary {
+        background: #007bff;
+        border: none;
+        color: #fff;
+      }
+      #import-product .btn-primary:hover {
+        background: #0056b3;
+      }
+      #import-product .result-box {
+        margin-top: 25px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 5px;
+        background: #f9f9f9;
+        font-size: 13px;
+        color: #222;
+        max-height: 420px;
+        overflow: auto;
+      }
+    </style>
+
+
+    <script>
+      (function(){
+        var frm = document.getElementById('frm-import');
+        var out = document.getElementById('result');
+
+        frm.addEventListener('submit', function(e){
+          e.preventDefault();
+          out.style.display='block';
+          out.textContent='⏳ Processing...';
+
+          var fd = new FormData(frm);
+          fetch(frm.getAttribute('action'), {
+            method: 'POST',
+            body: fd,
+            headers: {'X-Requested-With':'XMLHttpRequest'}
+          }).then(function(r){ return r.json(); })
+            .then(function(json){
+            out.textContent = JSON.stringify(json, null, 2);
+          })
+            .catch(function(err){
+            out.textContent = 'Error: ' + err;
+          });
+        });
+      })();
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+      $(function(){
+        $('.select2-category').select2({
+          placeholder: '-- Pilih Category --',
+          allowClear: true,
+          width: '100%'
+        });
+      });
+
+        // Auto focus ke search input saat dropdown terbuka
+  $(document).on('select2:open', () => {
+    document.querySelector('.select2-search__field').focus();
+  });
+
+    </script>
+
+    <style>
+          /* Select2 overrides */
+      .select2-container .select2-selection--single {
+        height: 38px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px 8px;
+        font-size: 14px;
+      }
+
+      .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 26px;
+        color: #333;
+      }
+
+      .select2-container--default .select2-results__option {
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #222;
+      }
+
+      .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background: #007bff;
+        color: #fff;
+      }
+
+      .select2-container--default .select2-results__option[aria-selected=true] {
+        background: #f0f4ff;
+        color: #007bff;
+      }
+/* pastikan font Select2 ikut style global */
+.select2-container,
+.select2-container .select2-selection--single,
+.select2-container .select2-results__option {
+  font-family: "Segoe UI", Roboto, sans-serif !important;
+}
+
+    </style>
+  </body>
+</html>
